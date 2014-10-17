@@ -94,3 +94,9 @@
 [submodule "pres-pack"]
 	path = pres-pack
 	url = git@github.com:ardumont/pres-pack.git
+[submodule "matlab-pack"]
+	path = matlab-pack
+	url = git@github.com:MC-Escherichia/matlab-pack.git
+[submodule "zenburn-pack"]
+	path = zenburn-pack
+	url = git@github.com:siancu/zenburn-pack.git
