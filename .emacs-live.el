@@ -1,4 +1,4 @@
-;;; emacs-live-packs.el --- emacs-live user packs
+;;; emacs-live-packs.el --- emacs-live personal packs
 
 ;; Copyright (C) 2013 Antoine R. Dumont <eniotna.t AT gmail.com>
 
@@ -61,10 +61,10 @@
 
 (emacs-live-packs/add-live-packs "~/.emacs-live-packs/"
                                  '("install-packages-pack"
-                                   "theme-pack"
-                                   ;;                                   "el-get-pack"
+;;                                   "theme-pack"
+;;                                   "el-get-pack"
                                    "buffer-pack"
-                                   "scratch-pack"
+;;                                   "scratch-pack"
                                    "blog-pack"
                                    "haskell-pack"
                                    "orgmode-pack"
@@ -79,18 +79,22 @@
                                    "clojurescript-pack"
                                    "caml-pack"
                                    "modeline-pack"
-                                   "twitter-pack"
-                                   "puppet-pack"
-                                   ;;                                   "chrome-pack"
-                                   "macro-pack"
-                                   "scala-pack"
+                   ;;                "twitter-pack"
+                     ;;              "puppet-pack"
+;;                                   "chrome-pack"
+                       ;;            "macro-pack"
+                         ;;          "scala-pack"
                                    "elisp-pack"
                                    "groovy-pack"
-                                   "php-pack"
-                                   ;;                                   "ctags-pack"
-                                   "prelude-live-pack"
-                                   "stumpwm-pack"
-                                   "pres-pack"))
+                           ;;        "php-pack"
+;;                                   "ctags-pack"
+                      ;             "prelude-live-pack"
+                       ;            "stumpwm-pack"
+                                   "pres-pack"
+                                   "zenburn-pack"
+;;                                   "matlab-pack"
+                                   "mfc-pack"
+                                   "helm-pack"))
 
 (provide 'emacs-live-packs)
 ;;; emacs-live-packs.el ends here
