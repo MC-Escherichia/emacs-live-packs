@@ -18,8 +18,8 @@
             (local-set-key (kbd "M-RET") 'cider-repl-return)))
 
 
-; disable damn insert key()
-(add-hook 'overwrite-mode-hook (lambda () (overwrite-mode 0)))
+; disable damn insert key
+(global-unset-key (kbd "<insert>"))
 
 (global-auto-revert-mode t)
 
@@ -97,15 +97,27 @@
 (global-set-key [f11] 'switch-to-mfc-home)
 (global-set-key [f12] 'switch-to-todo)
 
-;; (defun local-set-minor-mode-key (mode key def)
-;;   "Overrides a minor mode keybinding for the local
-;;    buffer, by creating or altering keymaps stored in buffer-local
-;;    `minor-mode-overriding-map-alist'."
-;;   (interactive "bmode\nbkey\nbdef" )
-;;   (let* ((oldmap (cdr (assoc mode minor-mode-map-alist)))
-;;          (newmap (or (cdr (assoc mode minor-mode-overriding-map-alist))
-;;                      (let ((map (make-sparse-keymap)))
-;;                        (set-keymap-parent map oldmap)
-;;                        (push `(,mode . ,map) minor-mode-overriding-map-alist)
-;;                        map))))
-;;     (define-key newmap key def)))
+
+
+;(require 'cider-inspect)
+
+;(setq nrepl-hide-special-buffers t)
+;;  ;(setq nrepl-popup-stacktraces-in-repl t)
+;;  (setq nrepl-history-file "~/.emacs.d/nrepl-history")
+;;  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+;;  (setq nrepl-log-messages t)
+;;
+;;  (add-hook 'nrepl-connected-hook
+;;  (defun pnh-clojure-mode-eldoc-hook ()
+;;  (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
+;;  ;(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+;;  ;(nrepl-enable-on-existing-clojure-buffers)))
+;;
+;;  ;; Repl mode hook
+;;  (add-hook 'nrepl-mode-hook 'subword-mode)
+;;
+;;  ;; Auto completion for NREPL
+;;  (require 'ac-nrepl)
+;;  (eval-after-load "auto-complete"
+;;  '(add-to-list 'ac-modes 'nrepl-mode))
+;;  (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)

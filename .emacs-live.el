@@ -31,7 +31,16 @@
 ;; emacs-live-packs. personal packs that extends the excellent emacs-live
 ;;
 ;;; Code:
-
+
+
+(live-use-packs '(stable/foundation-pack
+                  stable/lang-pack
+                  stable/power-pack
+                  stable/git-pack
+                  stable/org-pack
+;		  stable/clojure-pack
+;		  stable/bindings-pack
+                  ))
 
 (defun emacs-live-packs/add-live-packs (path packs)
   "Utility function to help in installing emacs-live-packs (bunch of user packs)"
@@ -51,8 +60,8 @@
      ;;                              "mail-pack"
        ;;                            "shell-pack"
          ;;                          "browser-pack"
-           ;;                        "chat-pack"
-             ;;                      "clojure-pack"
+            ;;                        "chat-pack"
+                                   "clojure-pack"
 ;;                                   "nrepl-pack"
                ;;                    "clojurescript-pack"
                  ;;                  "caml-pack"
@@ -67,11 +76,14 @@
                            ;;        "php-pack"
 ;;                                   "ctags-pack"
                       ;             "prelude-live-pack"
-                       ;            "stumpwm-pack"
+                                        ;            "stumpwm-pack"
+                                   "ess-pack"
                                    "pres-pack"
                                    "zenburn-pack"
                                    "matlab-pack"
                                    "mfc-pack"
                                    "helm-pack"))
 
+
+(live-add-packs '(stable/bindings-pack))
 ;;; emacs-live-packs.el ends here

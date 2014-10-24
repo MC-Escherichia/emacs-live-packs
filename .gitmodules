@@ -100,3 +100,6 @@
 [submodule "zenburn-pack"]
 	path = zenburn-pack
 	url = git@github.com:siancu/zenburn-pack.git
+[submodule "ess-pack/lib/ess"]
+	path = ess-pack/lib/ess
+	url = git@github.com:emacs-ess/ESS.git
