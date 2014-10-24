@@ -31,7 +31,16 @@
 ;; emacs-live-packs. personal packs that extends the excellent emacs-live
 ;;
 ;;; Code:
-
+
+
+(live-use-packs '(stable/foundation-pack
+                  stable/lang-pack
+                  stable/power-pack
+                  stable/git-pack
+                  stable/org-pack
+;		  stable/clojure-pack
+;		  stable/bindings-pack
+                  ))
 
 (defun live-load-pack (pack-dir)
   "Load a live pack. This is a dir that could contain either the
