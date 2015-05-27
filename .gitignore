@@ -1,2 +1,4 @@
 *.elc
 /dump-macro.el
+ess-pack/lib
+ess-pack/lib/ess/

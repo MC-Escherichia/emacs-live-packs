@@ -31,8 +31,6 @@
 ;; emacs-live-packs. personal packs that extends the excellent emacs-live
 ;;
 ;;; Code:
-
-
 (defun live-load-pack (pack-dir)
   "Load a live pack. This is a dir that could contain either the
   files info.el and init.el or `pack-name`.el. Adds the packs's
@@ -55,42 +53,73 @@
       (load-file pack-init))
     (setq live-current-pack-dir nil)))
 
+
 (defun emacs-live-packs/add-live-packs (path packs)
   "Utility function to help in installing emacs-live-packs (bunch of user packs)"
   (live-add-packs (mapcar (lambda (pack) (concat path pack)) packs)))
 
+;; (emacs-live-packs/add-live-packs
+;;  "~/.emac.d/packs/stable"
+;;  '("foundation-pack"
+;;    "lang-pack"
+;;    "power-pack"
+;;    "git-pack"
+;;    "org-pack"
+
+;;    ))
+
+(live-use-packs
+ '(stable/foundation-pack
+   stable/lang-pack
+   stable/power-pack
+   stable/git-pack
+   stable/org-pack
+   stable/clojure-pack
+   stable/bindings-pack
+   ))
+
 (emacs-live-packs/add-live-packs "~/.emacs-live-packs/"
                                  '("install-packages-pack"
-                                   "theme-pack"
+;                                   "theme-pack"
                                    ;;                                   "el-get-pack"
                                    "buffer-pack"
                                    "scratch-pack"
-                                   "blog-pack"
+ ;                                  "blog-pack"
                                    "haskell-pack"
                                    "orgmode-pack"
                                    "lisp-pack"
                                    "git-pack"
                                    "mail-pack"
-                                   "shell-pack"
+;;                                   "shell-pack"
                                    "browser-pack"
                                    "chat-pack"
                                    "clojure-pack"
-                                   ;;                                   "nrepl-pack"
+                                   o"nrepl-pack"
                                    "clojurescript-pack"
                                    "caml-pack"
                                    "modeline-pack"
                                    "twitter-pack"
-                                   "puppet-pack"
+  ;                                 "puppet-pack"
                                    ;;                                   "chrome-pack"
                                    "macro-pack"
-                                   "scala-pack"
+     ;                              "scala-pack"
                                    "elisp-pack"
-                                   "groovy-pack"
-                                   "php-pack"
+   ;                                "groovy-pack"
+    ;                               "php-pack"
                                    ;;                                   "ctags-pack"
                                    "prelude-live-pack"
                                    "stumpwm-pack"
                                    "pres-pack"))
 
-(provide 'emacs-live-packs)
+;;; (setf live-packs '())
 ;;; emacs-live-packs.el ends here
+(emacs-live-packs/add-live-packs "~/.mfc-live-packs/"
+                                 '("zenburn-pack"))
+
+
+;;(emacs-live-packs/add-live-packs "~/.emacs.d/packs/stable/"
+;;                                '("bindings-pack"))
+
+;;(mapcar 'live-load-pack live-packs)
+
+(provide 'emacs-live-packs)
