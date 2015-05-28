@@ -9,6 +9,7 @@
 ;;                            ;;
 ;; GROUP: Convenience -> Helm ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(install-packages-pack/install-pack 'helm)
 (require 'helm)
 
 ;; must set before helm-config,  otherwise helm use default
@@ -72,13 +73,12 @@
 
 (global-set-key (kbd "C-c h x") 'helm-register)
 
-(global-set-key (kbd "C-x C-g") 'helm-projectile)
+;; (global-set-key (kbd "C-x C-g") 'helm-projectile)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PACKAGE: helm-descbinds                      ;;
 ;;                                              ;;
 ;; GROUP: Convenience -> Helm -> Helm Descbinds ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(install-packs '(helm-descbinds))
+(install-packages-pack/install-pack 'helm-descbinds)
 (require 'helm-descbinds)
 (helm-descbinds-mode)
