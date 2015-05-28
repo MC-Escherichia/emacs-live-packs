@@ -38,8 +38,8 @@
                   stable/power-pack
                   stable/git-pack
                   stable/org-pack
-;		  stable/clojure-pack
-;		  stable/bindings-pack
+		  stable/clojure-pack
+		  stable/bindings-pack
                   ))
 
 (defun live-load-pack (pack-dir)
@@ -47,10 +47,10 @@
   files info.el and init.el or `pack-name`.el. Adds the packs's
   dir and lib dir to the load-path"
   (message (concat "\n\n==> Loading Emacs Live Pack: " pack-dir ))
-  (let* ((pack-dir         (file-name-as-directory pack-dir))
+  (let* ((pack-name         (file-name-nondirectory (directory-file-name pack-dir) ))
          (pack-info        (concat pack-dir "info.el"))
          (maybe-pack-init  (concat pack-dir "init.el")) ;; default init in emacs-live
-         (maybe-pack-init2 (concat pack-dir "/" pack-dir ".el")) ;; I no longer use emacs-live's convention but emacs'
+         (maybe-pack-init2 (concat pack-dir pack-name ".el")) ;; I no longer use emacs-live's convention but emacs'
          (pack-init        (if (file-exists-p maybe-pack-init) maybe-pack-init maybe-pack-init2)))
     (setq live-current-pack-dir pack-dir)
     (live-clear-pack-info)
@@ -58,7 +58,7 @@
       (progn
         (load-file pack-info)
         (live-print-pack-info)))
-    (add-to-list 'load-path pack-dir)
+    ;(add-to-list 'load-path pack-dir)
     (add-to-list 'load-path (live-pack-lib-dir))
     (when (file-exists-p pack-init)
       (load-file pack-init))
@@ -74,19 +74,19 @@
 ;;                                   "el-get-pack"
                                    "buffer-pack"
 ;;                                   "scratch-pack"
-                                   "blog-pack"
+;;                                   "blog-pack"
                                    "haskell-pack"
                                    "orgmode-pack"
                                    "lisp-pack"
                                    "git-pack"
-                                   "mail-pack"
+;;                                   "mail-pack"
                                    "shell-pack"
-                                   "browser-pack"
+  ;;                                 "browser-pack"
                                    "chat-pack"
                                    "clojure-pack"
                                    ;;                                   "nrepl-pack"
                                    "clojurescript-pack"
-                                   "caml-pack"
+    ;;                               "caml-pack"
                                    "modeline-pack"
                    ;;                "twitter-pack"
                      ;;              "puppet-pack"
@@ -94,11 +94,11 @@
                        ;;            "macro-pack"
                          ;;          "scala-pack"
                                    "elisp-pack"
-                                   "groovy-pack"
+      ;;                             "groovy-pack"
                            ;;        "php-pack"
-;;                                   "ctags-pack"
-                      ;             "prelude-live-pack"
-                       ;            "stumpwm-pack"
+      ;;                                   "ctags-pack"
+      "prelude-live-pack"
+      "stumpwm-pack"
                                    "pres-pack"
                                    "zenburn-pack"
 ;;                                   "matlab-pack"
