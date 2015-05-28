@@ -9,6 +9,7 @@
 ;;                            ;;
 ;; GROUP: Convenience -> Helm ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(install-packages-pack/install-pack 'helm)
 (require 'helm)
 
 ;; must set before helm-config,  otherwise helm use default
@@ -78,7 +79,6 @@
 ;;                                              ;;
 ;; GROUP: Convenience -> Helm -> Helm Descbinds ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (install-packages-pack/install-pack 'helm-descbinds)
 (require 'helm-descbinds)
 (helm-descbinds-mode)
