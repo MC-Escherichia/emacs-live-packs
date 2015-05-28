@@ -23,7 +23,7 @@
 
 (global-auto-revert-mode t)
 
-(install-packs '(helm-spotify spotify))
+(install-packages-pack/install-packs '(helm-spotify spotify))
 (global-set-key (kbd "s-<pause>") #'spotify-playpause)
 (global-set-key (kbd "s-M-<pause>") #'spotify-next)
 
