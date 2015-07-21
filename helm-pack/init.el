@@ -9,7 +9,7 @@
 ;;                            ;;
 ;; GROUP: Convenience -> Helm ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(install-packages-pack/install-pack 'helm)
+(install-packages-pack/install-packs '(helm helm-projectile ))
 (require 'helm)
 
 ;; must set before helm-config,  otherwise helm use default

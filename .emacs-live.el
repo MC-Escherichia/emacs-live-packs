@@ -32,6 +32,10 @@
 ;;
 ;;; Code:
 
+(require 'cask "/usr/share/cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+(pallet-mode t)
 
 (live-use-packs '(stable/foundation-pack
                   stable/lang-pack
@@ -41,6 +45,7 @@
 		  stable/clojure-pack
 		  stable/bindings-pack
                   ))
+
 
 (defun live-load-pack (pack-dir)
   "Load a live pack. This is a dir that could contain either the
@@ -70,40 +75,47 @@
 
 (emacs-live-packs/add-live-packs "~/.emacs-live-packs/"
                                  '("install-packages-pack"
-;;                                   "theme-pack"
-;;                                   "el-get-pack"
+                                   ;;"theme-pack"
+                                   ;;"el-get-pack"
                                    "buffer-pack"
-;;                                   "scratch-pack"
-;;                                   "blog-pack"
-                                   "haskell-pack"
+                                   ;;"scratch-pack"
+                                   ;;"blog-pack"
+                                   ;;"haskell-pack"
                                    "orgmode-pack"
                                    "lisp-pack"
                                    "git-pack"
-;;                                   "mail-pack"
+                                   ;;"mail-pack"
                                    "shell-pack"
-  ;;                                 "browser-pack"
+                                   ;;"browser-pack"
                                    "chat-pack"
                                    "clojure-pack"
-                                   ;;                                   "nrepl-pack"
+                                   ;;"nrepl-pack"
                                    "clojurescript-pack"
-    ;;                               "caml-pack"
+                                   ;;"caml-pack"
                                    "modeline-pack"
-                   ;;                "twitter-pack"
-                     ;;              "puppet-pack"
-;;                                   "chrome-pack"
-                       ;;            "macro-pack"
-                         ;;          "scala-pack"
+                                   ;;"twitter-pack"
+                                   ;;"puppet-pack"
+                                   ;;"chrome-pack"
+                                   ;;"macro-pack"
+                                   ;;"scala-pack"
                                    "elisp-pack"
-      ;;                             "groovy-pack"
-                           ;;        "php-pack"
-      ;;                                   "ctags-pack"
-      "prelude-live-pack"
-      "stumpwm-pack"
+                                   ;;"groovy-pack"
+                                   ;;"php-pack"
+                                   ;;"ctags-pack"
+                                   "prelude-live-pack"
+                                   "stumpwm-pack"
                                    "pres-pack"
                                    "zenburn-pack"
-;;                                   "matlab-pack"
+                                   ;;"matlab-pack"
                                    "mfc-pack"
                                    "helm-pack"))
 
+
+
 (provide 'emacs-live-packs)
+
+
+; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+
+
 ;;; emacs-live-packs.el ends here

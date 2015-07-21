@@ -23,36 +23,39 @@
 
 (global-auto-revert-mode t)
 
-(install-packages-pack/install-packs '(helm-spotify spotify))
-(global-set-key (kbd "s-<pause>") #'spotify-playpause)
-(global-set-key (kbd "s-M-<pause>") #'spotify-next)
+;; (install-packages-pack/install-packs '(helm-spotify spotify))
+(global-set-key (kbd "s-<down>") #'spotify-playpause)
+(global-set-key (kbd "s-<right>") #'spotify-next)
+(global-set-key (kbd "s-<up>") #'helm-spotify)
 
-;On a system supporting freedesktop.org's D-Bus you can enable song notifications in the minibuffer.
+                                        ;On a system supporting freedesktop.org's D-Bus you can enable song notifications in the minibuffer.
 
+;; God dman it matt, remember to add the proper lines to xinitrc, so minimal WM's have access to dbus
 (spotify-enable-song-notifications)
 
 ;; themes
- (add-to-list 'default-frame-alist '( font . "inconsolata"))
-(set-face-attribute 'default nil :height 110 :width 'condensed )
+(add-to-list 'default-frame-alist '( font . "DejaVu Sans Mono"))
 
+(defun buffer-face-mode-fixed ()
+  "Sets a fixed width (monospace) font in current buffer"
+  (interactive)
+  (setq buffer-face-mode-face '(:family "DejaVu Sans Mono" :height 110 :weight medium))
+  (buffer-face-mode))
 
-
-
- (defun buffer-face-mode-fixed ()
-"Sets a fixed width (monospace) font in current buffer"
-(interactive)
-(setq buffer-face-mode-face '(:family "Inconsolata" :height 120 :weight medium))
-(buffer-face-mode))
+(buffer-face-mode-fixed)
 
 (defun buffer-face-mode-variable ()
 "Set font to a variable width (proportional) fonts in current buffer"
 (interactive)
-(setq buffer-face-mode-face '(:family "DejaVu Serif" :height 120 :width semi-expanded :weight medium))
+(setq buffer-face-mode-face '(:family "DejaVu Serif" :height 110 :width medium :weight medium))
 (buffer-face-mode))
 
-(add-hook 'erc-mode-hook 'my-buffer-face-mode-variable)
+;; ABCDEFGHIJKLM
+;; NOPQRSTUVWXYZ
+
+(add-hook 'erc-mode-hook 'buffer-face-mode-variable)
 ;1; Set default font faces for Info and ERC modes
-(add-hook 'Info-mode-hook 'my-buffer-face-mode-variable)
+(add-hook 'Info-mode-hook 'buffer-face-mode-variable)
 
 (defun toggle-buffer-face ()
    (interactive)
@@ -81,27 +84,29 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
-(setq mfc-home-file "~/Dropbox/org/researchjournal.org" )
+(setq mfc-home-file "~/Dropbox/org/journal.org")
 (defun set-mfc-home ()
   (interactive)
   (setq mfc-home-file buffer-file-name))
-
 
 (defun switch-to-mfc-home ()
   (interactive)
   (switch-to-buffer (find-file mfc-home-file)))
 
-
-
-(global-set-key [f6] 'centered-window-mode)
-(global-set-key [f11] 'switch-to-mfc-home)
-(global-set-key [f12] 'switch-to-todo)
+(defun switch-to-todo ()
+  (interactive)
+  (switch-to-buffer (find-file "~/Dropbox/org/gtd/gtd.org")))
 
 
 
-;(require 'cider-inspect)
+;; (install-packages-pack/install-packs '(writeroom-mode centered-window-mode))
+(global-set-key [C-f6] 'centered-window-mode)
+(global-set-key [C-f11] 'switch-to-mfc-home)
+(global-set-key [C-f12] 'switch-to-todo)
 
-;(setq nrepl-hide-special-buffers t)
+                                        ;(require 'cider-inspect)
+
+                                        ;(setq nrepl-hide-special-buffers t)
 ;;  ;(setq nrepl-popup-stacktraces-in-repl t)
 ;;  (setq nrepl-history-file "~/.emacs.d/nrepl-history")
 ;;  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -121,3 +126,50 @@
 ;;  (eval-after-load "auto-complete"
 ;;  '(add-to-list 'ac-modes 'nrepl-mode))
 ;;  (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+
+
+
+
+
+(defun local-set-tab-width (n)
+  (set-variable 'tab-width n t))
+
+(add-hook 'jade-mode-hook (lambda ()
+                            (setq indent-tabs-mode t)
+                            (push 'jade-mode live-ignore-whitespace-modes)
+                            (local-set-tab-width 2))) (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+
+                                        ;  moved delete trailing whitespace into live-cleanup-whitespace
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'less-css-mode-hook 'skewer-less-mode)
+
+(add-hook 'html-mode-hook 'skewer-html-mode)
+
+
+(add-hook 'less-css-mode-hook '(lambda () (local-set-tab-width 2)))
+
+(require 'skewer-mode)
+
+(defun my-run-skewer ()
+  (interactive)
+  (httpd-stop)
+  (setq httpd-port 8081)
+  (httpd-start)
+  (skewer-repl))
+
+
+;; (add-hook 'less-css-mode '(lambda () (add-hook 'before-save-hook (lambda () (replace-string "    " "  ")) t t)))
+
+
+
+
+
+
+
+
+
+;;; and finally
+
+(if (not  (server-running-p))
+    (server-start))
