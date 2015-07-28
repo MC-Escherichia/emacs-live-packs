@@ -134,9 +134,6 @@
 ;;  (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
 
 
-
-
-
 (defun local-set-tab-width (n)
   (set-variable 'tab-width n t))
 
@@ -164,24 +161,21 @@
   (httpd-start)
   (skewer-repl))
 
+;; color theme simplified
+(require 'zenburn-theme)
+(load-theme 'zenburn t)
 
 ;; (add-hook 'less-css-mode '(lambda () (add-hook 'before-save-hook (lambda () (replace-string "    " "  ")) t t)))
 
 ;; emacs-development work
 
 
-
 (--each  (f-directories "~/.emacs.d/dev/")
   (add-to-list 'load-path it))
-
-
-
-
-
-
 
 ;;; finally
 
 (if (not  (server-running-p))
     (server-start))
+
 (provide 'mfc-pack)
