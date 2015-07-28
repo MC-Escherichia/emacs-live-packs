@@ -1,4 +1,4 @@
-;;; emacs-live-packs.el --- emacs-live user packs
+;;; emacs-live-packs.el --- emacs-live personal packs
 
 ;; Copyright (C) 2013 Antoine R. Dumont <eniotna.t AT gmail.com>
 
@@ -31,7 +31,17 @@
 ;; emacs-live-packs. personal packs that extends the excellent emacs-live
 ;;
 ;;; Code:
-
+
+(live-use-packs '(stable/foundation-pack
+                  stable/colour-pack
+                  stable/lang-pack
+                  stable/power-pack
+                  stable/git-pack
+                  stable/org-pack
+		  stable/clojure-pack
+		  stable/bindings-pack
+                  ))
+
 
 ;;
 ;; Read only
@@ -56,45 +66,59 @@
 ;;
 
 (defvar emacs-live-packs/user-packs '("install-packages-pack"
-                                      "theme-pack"
-                                      ;; "el-get-pack"
+                                      ;;"theme-pack"
+                                      ;;"el-get-pack"
                                       "buffer-pack"
-                                      "scratch-pack"
-                                      ;; "blog-pack"
-                                      ;; "haskell-pack"
+                                      ;;"scratch-pack"
+                                      ;;"blog-pack"
+                                      ;;"haskell-pack"
                                       "orgmode-pack"
                                       "lisp-pack"
                                       "git-pack"
-                                      "mail-pack"
+                                      ;;"mail-pack"
                                       "shell-pack"
-                                      "browser-pack"
-                                      ;; "chat-pack"
-                                      ;; "clojure-pack"
-                                      ;; "nrepl-pack"
-                                      ;; "clojurescript-pack"
-                                      ;; "caml-pack"
+                                      ;;"browser-pack"
+                                      "chat-pack"
+                                      "clojure-pack"
+                                      ;;"nrepl-pack"
+                                      "clojurescript-pack"
+                                      ;;"caml-pack"
                                       "modeline-pack"
-                                      "twitter-pack"
-                                      "puppet-pack"
-                                      ;; "chrome-pack"
-                                      "macro-pack"
-                                      ;; "scala-pack"
+                                      ;;"twitter-pack"
+                                      ;;"puppet-pack"
+                                      ;;"chrome-pack"
+                                      ;;"macro-pack"
+                                      ;;"scala-pack"
                                       "elisp-pack"
-                                      ;; "groovy-pack"
-                                      ;; "php-pack"
-                                      ;; "ctags-pack"
+                                      ;;"groovy-pack"
+                                      ;;"php-pack"
+                                      ;;"ctags-pack"
                                       "prelude-live-pack"
-                                      ;; "stumpwm-pack"
-                                      ;; "pres-pack"
-                                      )
+                                      "stumpwm-pack"
+                                      "pres-pack"
+;;                                      "zenburn-pack"
+                                      ;;"matlab-pack"
+                                      "mfc-pack"
+                                      "helm-pack")
   "User's packs. Feel free to comment out the ones you do not want.")
 
 ;;
 ;; Read only
 ;;
 
+
 (mapc (lambda (pack-name-str)
         (require (intern pack-name-str) nil 'no-error)) emacs-live-packs/user-packs)
 
+(emacs-live-packs/add-live-packs "~/.emacs-live-packs/")
+
+
+
+
 (provide 'emacs-live-packs)
+
+
+; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+
+
 ;;; emacs-live-packs.el ends here

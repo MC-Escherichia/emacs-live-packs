@@ -1,6 +1,6 @@
 pull:
-	git fetch --prune
-	git pull --rebase --recurse-submodules origin master
+	git pull --rebase --prune --recurse-submodules upstream master
+	git merge upstream/master
 	git submodule update --init
 
 push:
@@ -9,10 +9,3 @@ push:
 update-modules:
 	~/bin/git/git-merge-submodules.sh
 	git commit -am "Update deps"
-
-push-sub:
-	~/bin/git/git-push-submodules.sh
-	make push
-
-clean-elc:
-	find -type f -iname "*.elc" -exec rm {} \;
