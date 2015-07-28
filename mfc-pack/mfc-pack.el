@@ -97,13 +97,19 @@
   (interactive)
   (switch-to-buffer (find-file "~/Dropbox/org/gtd/gtd.org")))
 
-
+(defun check-messages ()
+  (interactive)
+  (if (string-equal (buffer-name) "*Messages*")
+      (switch-to-buffer (other-buffer))
+    (switch-to-buffer "*Messages*")))
 
 ;; (install-packages-pack/install-packs '(writeroom-mode centered-window-mode))
 (global-set-key [C-f6] 'centered-window-mode)
 (global-set-key [C-f11] 'switch-to-mfc-home)
 (global-set-key [C-f12] 'switch-to-todo)
 
+(global-set-key (kbd "C-x m")
+                'check-messages)
                                         ;(require 'cider-inspect)
 
                                         ;(setq nrepl-hide-special-buffers t)
@@ -161,6 +167,12 @@
 
 ;; (add-hook 'less-css-mode '(lambda () (add-hook 'before-save-hook (lambda () (replace-string "    " "  ")) t t)))
 
+;; emacs-development work
+
+
+
+(--each  (f-directories "~/.emacs.d/dev/")
+  (add-to-list 'load-path it))
 
 
 
@@ -168,8 +180,7 @@
 
 
 
-
-;;; and finally
+;;; finally
 
 (if (not  (server-running-p))
     (server-start))
