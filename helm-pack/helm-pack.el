@@ -30,6 +30,8 @@
 (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
 (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
 
+(helm-mode 1)
+
 (setq
  helm-google-suggest-use-curl-p t
  helm-scroll-amount 4 ; scroll 4 lines other window using M-<next>/M-<prior>
@@ -53,11 +55,9 @@
  helm-buffers-fuzzy-matching t          ; fuzzy matching buffer names when non--nil
                                         ; useful in helm-mini that lists buffers
  )
-
 ;; Save current position to mark ring when jumping to a different place
-(add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
-(helm-mode 1)
+(add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
 (global-set-key (kbd "M-x") 'helm-M-x)
 
@@ -74,6 +74,9 @@
 (global-set-key (kbd "C-c h x") 'helm-register)
 
 (global-set-key (kbd "C-x C-g") 'helm-projectile)
+
+(--each '(icomplete-mode ido-everywhere)
+  (funcall it 0))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PACKAGE: helm-descbinds                      ;;
 ;;                                              ;;
