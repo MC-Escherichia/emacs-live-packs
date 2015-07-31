@@ -84,7 +84,7 @@
                                       "clojurescript-pack"
                                       ;;"caml-pack"
                                       "modeline-pack"
-                                      ;;"twitter-pack"
+                                      "twitter-pack"
                                       ;;"puppet-pack"
                                       ;;"chrome-pack"
                                       ;;"macro-pack"
@@ -96,10 +96,9 @@
                                       "prelude-live-pack"
                                       "stumpwm-pack"
                                       "pres-pack"
-;;                                      "zenburn-pack"
-                                      ;;"matlab-pack"
+                                      "helm-pack"
                                       "mfc-pack"
-                                      "helm-pack")
+                                      )
   "User's packs. Feel free to comment out the ones you do not want.")
 
 ;;
@@ -107,18 +106,16 @@
 ;;
 
 
-(mapc (lambda (pack-name-str)
-        (require (intern pack-name-str) nil 'no-error)) emacs-live-packs/user-packs)
+(defun load-ardu-emacs-live-packs ()
+  (mapc (lambda (pack-name-str)
+          (require (intern pack-name-str) nil 'no-error)) emacs-live-packs/user-packs))
 
-(emacs-live-packs/add-live-packs "~/.emacs-live-packs/")
-
-
-
-
-(provide 'emacs-live-packs)
+(add-to-list 'after-init-hook 'load-ardu-emacs-live-packs)
+;; (emacs-live-packs/add-live-packs "~/.emacs-live-packs/")
 
 
-; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+;; (provide 'emacs-live-packs)
+                                        ; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 
 ;;; emacs-live-packs.el ends here
