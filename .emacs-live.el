@@ -108,6 +108,7 @@
 
 (defun load-ardu-emacs-live-packs ()
   (mapc (lambda (pack-name-str)
+          (message "Loading ardu pack: %s" pack-name-str)
           (require (intern pack-name-str) nil 'no-error)) emacs-live-packs/user-packs))
 
 (add-to-list 'after-init-hook 'load-ardu-emacs-live-packs)
