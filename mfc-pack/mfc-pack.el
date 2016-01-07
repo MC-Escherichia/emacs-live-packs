@@ -4,6 +4,10 @@
 ;; See README for more information.
 
 ;; Load bindings config
+(require 'epa-file)
+(epa-file-enable)
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
 (add-hook 'clojure-mode-hook (lambda ()
                                (clj-refactor-mode 1)
                                ;;                              ;; inset keybidning set up here
@@ -23,6 +27,9 @@
 
 (global-auto-revert-mode t)
 
+(require 're-builder)
+(setq reb-re-syntax 'string)
+
 ;; (install-packages-pack/install-packs '(helm-spotify spotify))
 (global-set-key (kbd "s-<down>") #'spotify-playpause)
 (global-set-key (kbd "s-<right>") #'spotify-next)
@@ -31,7 +38,7 @@
                                         ;On a system supporting freedesktop.org's D-Bus you can enable song notifications in the minibuffer.
 
 ;; God dman it matt, remember to add the proper lines to xinitrc, so minimal WM's have access to dbus
-(spotify-enable-song-notifications)
+(if (window-system) (spotify-enable-song-notifications))
 
 ;; themes
 ;; (add-to-list 'default-frame-alist '( font . "DejaVu Sans Mono"))
@@ -110,20 +117,42 @@
   (interactive)
   (switch-to-buffer (find-file "~/Dropbox/org/gtd/gtd.org")))
 
+(defun switch-to-job-todo ()
+  (interactive)
+  (switch-to-buffer (find-file "~/Dropbox/org/gtd/arthena-web.org")))
+
+(defun switch-to-job-todo2 ()
+  (interactive)
+  (switch-to-buffer (find-file "~/Dropbox/org/gtd/arthena.org")))
+
+(global-set-key [C-f6] 'centered-window-mode)
+(global-set-key [C-f10] 'switch-to-mfc-pack)
+(global-set-key [C-f11] 'switch-to-mfc-home)
+(global-set-key [C-f12] 'switch-to-todo)
+(global-set-key [C-f9] 'switch-to-job-todo)
+(global-set-key [M-f9] 'switch-to-job-todo2)
+
 (defun check-messages ()
+  "Switches active buffer to *Messages*. If *Messages* is active, goes to last active buffer."
   (interactive)
   (if (string-equal (buffer-name) "*Messages*")
       (switch-to-buffer (other-buffer))
     (switch-to-buffer "*Messages*")))
 
-;; (install-packages-pack/install-packs '(writeroom-mode centered-window-mode))
-(global-set-key [C-f6] 'centered-window-mode)
-(global-set-key [C-f10] 'switch-to-mfc-pack)
-(global-set-key [C-f11] 'switch-to-mfc-home)
-(global-set-key [C-f12] 'switch-to-todo)
+(defun check-scratch ()
+  (interactive)
+  (if (string-equal (buffer-name) "*scratch*")
+      (switch-to-buffer (other-buffer))
+    (switch-to-buffer "*scratch*")))
+
+(global-set-key (kbd "C-x j")
+                'check-scratch)
 
 (global-set-key (kbd "C-x m")
                 'check-messages)
+
+(global-set-key (kbd "C-x M")
+                'mu4e-compose-new)
                                         ;(require 'cider-inspect)
 
                                         ;(setq nrepl-hide-special-buffers t)
@@ -204,10 +233,17 @@
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 
 (avy-setup-default)
+
+(defun load-library-el ()
+  (interactive)
+  (let ((load-suffixes '(".el")))
+    (call-interactively 'load-library)))
 ;; emacs-development work
 
 (--each  (f-directories "~/.emacs.d/dev/")
   (add-to-list 'load-path it))
+
+(setq source-directory "/var/abs/extra/emacs/src/emacs-24.5/")
 
 (require 'slime)
 (setq slime-contribs '(slime-fancy slime-js))
@@ -218,24 +254,26 @@
             (slime-mode 1)
             (local-set-key [f5] 'slime-js-reload)
             ;; (setq slime-contribs '())
-            (slime-js-minor-mode 1)))
+            (slime-js-minor-mode 1)
+            (paredit-everywhere-mode)))
 
+(add-hook 'js-mode-hook 'paredit-everywhere-mode)
 
-
-;; (load (expand-file-name "~/.emacs.d/.cask/24.5.1/elpa/slime-20150731.1337/contrib/slime-js"))
-                                        ;
 (global-company-mode)
 (defun local-set-tab-width (n)
   (set-variable 'tab-width n t))
 (when  (require 'jade-mode nil t)
 
-
-
+  (defun skewer-browser-reload ()
+    "When skewer appears to be active, ask for a reload."
+    (interactive)
+    (skewer-eval "window.location.reload(true);"))
   (add-hook 'jade-mode-hook (lambda ()
                               (setq indent-tabs-mode t)
                               (push 'jade-mode live-ignore-whitespace-modes)
                               (local-set-tab-width 2)
-                              (remove-hook 'before-save-hook 'delete-trailing-whitespace))))
+                              (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+                              (define-key jade-mode-map (kbd "C-c C-k") 'skewer-browser-reload))))
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "/usr/bin/conkeror")
@@ -249,5 +287,15 @@
 
 ;; (if (not  (server-running-p))
 ;;     (server-start))
+
+(if (equal window-system 'x)
+    (progn
+      (set-fontset-font "fontset-default" 'unicode "Dejavu Sans Mono")
+      (set-face-font 'default "Inconsolata-12")))
+
+
+(global-set-key (kbd "<f6>") (lambda () (interactive) (magit-status-internal "~/Code/arthena/arthena")))
+
+
 
 (provide 'mfc-pack)
