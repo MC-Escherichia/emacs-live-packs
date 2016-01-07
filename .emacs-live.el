@@ -33,7 +33,7 @@
 ;;; Code:
 
 (live-use-packs '(stable/foundation-pack
-;;                  stable/colour-pack
+                  ;; stable/colour-pack
                   stable/lang-pack
                   stable/power-pack
                   stable/git-pack
@@ -75,7 +75,7 @@
                                       "orgmode-pack"
                                       "lisp-pack"
                                       "git-pack"
-                                      ;;"mail-pack"
+                                      "mail-pack"
                                       "shell-pack"
                                       ;;"browser-pack"
                                       "chat-pack"
@@ -97,8 +97,7 @@
                                       "stumpwm-pack"
                                       "pres-pack"
                                       "helm-pack"
-                                      "mfc-pack"
-                                      )
+                                      "mfc-pack")
   "User's packs. Feel free to comment out the ones you do not want.")
 
 ;;
