@@ -59,6 +59,7 @@
                                         :width condensed
                                         :height 110
                                         :weight medium))
+
   (buffer-face-mode))
 
 (add-hook 'change-major-mode-after-body-hook  (buffer-face-mode-fixed))
@@ -251,19 +252,42 @@
 
 (setq source-directory "/var/abs/extra/emacs/src/emacs-24.5/")
 
+
+;; (setq slime-contribs '(slime-fancy slime-js))
+
+(eval-after-load 'auto-complete
+  '(progn
+     (add-to-list 'ac-modes 'slime-repl-mode)
+     (add-to-list 'ac-modes 'js2-mode)
+     (add-to-list 'ac-modes 'js-mode)
+     (add-hook 'slime-mode-hook 'set-up-slime-ac)
+     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)))
+
+(eval-after-load 'slime
+  '(progn
+     (setq ;; slime-protocol-version 'ignore
+      slime-net-coding-system 'utf-8-unix
+      slime-complete-symbol*-fancy t
+      slime-complete-symbol-function) 'slime-fuzzy-complete-symbol
+      (slime-setup '(slime-js))))
 (require 'slime)
-(setq slime-contribs '(slime-fancy slime-js))
 ;; swank js
 (require 'slime-js)
+
+(setq slime-js-swank-command "swank-js"
+      slime-js-swank-args '())
 (add-hook 'js2-mode-hook
           (lambda ()
-            (slime-mode 1)
-            (local-set-key [f5] 'slime-js-reload)
-            ;; (setq slime-contribs '())
+            (slime-setup '(slime-js))
+            (global-set-key [f5] 'slime-js-reload)
             (slime-js-minor-mode 1)
-            (paredit-everywhere-mode)))
 
-(add-hook 'js-mode-hook 'paredit-everywhere-mode)
+            ))
+
+
+
+
+;; (add-hook 'js-mode-hook 'paredit-everywhere-mode)
 
 (global-company-mode)
 (defun local-set-tab-width (n)
@@ -297,10 +321,17 @@
 (if (equal window-system 'x)
     (progn
       (set-fontset-font "fontset-default" 'unicode "Dejavu Sans Mono")
-      (set-face-font 'default "Inconsolata-12")))
+      (set-face-font 'default "Inconsolatazi4-12")))
 
 
 (global-set-key (kbd "<f6>") (lambda () (interactive) (magit-status-internal "~/Code/arthena/arthena")))
+
+(prefer-coding-system       'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 
 
