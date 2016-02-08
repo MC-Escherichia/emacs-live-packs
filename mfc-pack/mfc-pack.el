@@ -35,9 +35,15 @@
 (global-set-key (kbd "s-<right>") #'spotify-next)
 (global-set-key (kbd "s-<up>") #'helm-spotify)
 
+(require 'smartparens-config)
+(add-hook 'prog-mode-hook #'smartparens-mode)
+(add-hook 'lispy-mode-hook (lambda () (smartparens-mode 0)))
+(smartparens-global-strict-mode 1)
+
+
                                         ;On a system supporting freedesktop.org's D-Bus you can enable song notifications in the minibuffer.
 
-;; God dman it matt, remember to add the proper lines to xinitrc, so minimal WM's have access to dbus
+;; God damn it matt, remember to add the proper lines to xinitrc, so minimal WM's have access to dbus
 (if (window-system) (spotify-enable-song-notifications))
 
 ;; themes
