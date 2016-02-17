@@ -255,41 +255,30 @@
 
 ;; (setq slime-contribs '(slime-fancy slime-js))
 
-(eval-after-load 'auto-complete
-  '(progn
-     (add-to-list 'ac-modes 'slime-repl-mode)
-     (add-to-list 'ac-modes 'js2-mode)
-     (add-to-list 'ac-modes 'js-mode)
-     (add-hook 'slime-mode-hook 'set-up-slime-ac)
-     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)))
 
 (eval-after-load 'slime
   '(progn
+     (require 'slime-js)
      (setq ;; slime-protocol-version 'ignore
       slime-net-coding-system 'utf-8-unix
       slime-complete-symbol*-fancy t
       slime-complete-symbol-function) 'slime-fuzzy-complete-symbol
-      (slime-setup '(slime-js))))
-(require 'slime)
+      (slime-setup '(slime-js slime-fancy slime-fancy))))
+
 ;; swank js
-(require 'slime-js)
+
 
 (setq slime-js-swank-command "swank-js"
       slime-js-swank-args '())
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (slime-setup '(slime-js))
-            (global-set-key [f5] 'slime-js-reload)
-            (slime-js-minor-mode 1)
-
-            ))
 
 
 
 
-;; (add-hook 'js-mode-hook 'paredit-everywhere-mode)
 
-(global-company-mode)
+
+
+
+(global-company-mode 1)
 (defun local-set-tab-width (n)
   (set-variable 'tab-width n t))
 (when  (require 'jade-mode nil t)

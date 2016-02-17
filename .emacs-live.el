@@ -65,6 +65,7 @@
 ;; Edit this part as you please (just keep the install-packages-pack)
 ;;
 
+
 (defvar emacs-live-packs/user-packs '("install-packages-pack"
                                       ;;"theme-pack"
                                       ;;"el-get-pack"
@@ -72,9 +73,10 @@
                                       ;;"scratch-pack"
                                       ;;"blog-pack"
                                       ;;"haskell-pack"
-                                      "orgmode-pack"
+;;                                      "orgmode-pack"
                                       "lisp-pack"
                                       "git-pack"
+                                      "js-pack"
                                       "mail-pack"
                                       "shell-pack"
                                       ;;"browser-pack"
@@ -99,7 +101,7 @@
                                       "helm-pack"
                                       "mfc-pack")
   "User's packs. Feel free to comment out the ones you do not want.")
-
+;;
 ;;
 ;; Read only
 ;;
