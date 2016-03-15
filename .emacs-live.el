@@ -72,8 +72,8 @@
                                       "buffer-pack"
                                       ;;"scratch-pack"
                                       ;;"blog-pack"
-                                      ;;"haskell-pack"
-;;                                      "orgmode-pack"
+                                      "haskell-pack"
+                                      ;;"orgmode-pack"
                                       "lisp-pack"
                                       "git-pack"
                                       "js-pack"
@@ -105,7 +105,6 @@
 ;;
 ;; Read only
 ;;
-
 
 (defun load-ardu-emacs-live-packs ()
   (mapc (lambda (pack-name-str)

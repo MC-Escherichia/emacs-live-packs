@@ -252,6 +252,10 @@
 
 (setq source-directory "/var/abs/extra/emacs/src/emacs-24.5/")
 
+(require 'exec-path-from-shell)
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
 
 ;; (setq slime-contribs '(slime-fancy slime-js))
 
@@ -263,7 +267,9 @@
       slime-net-coding-system 'utf-8-unix
       slime-complete-symbol*-fancy t
       slime-complete-symbol-function) 'slime-fuzzy-complete-symbol
-      (slime-setup '(slime-js slime-fancy slime-fancy))))
+      (slime-setup '(slime-js slime-fancy slime-fancy))
+      (add-hook 'slime-js-minor-mode-on-hook
+                '(lambda () (local-set-key (kbd "C-c r r") #'slime-js-send-region)))))
 
 ;; swank js
 
